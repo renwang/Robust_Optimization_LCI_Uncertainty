@@ -1,6 +1,6 @@
 clear all; clc;
 A=[-5 50;10 0];
-B=[12 3];
+B=[12 1];
 
 [n,~]=size(A);
 [m,~]=size(B);
