@@ -1,15 +1,15 @@
-% In this file, the following input data are specified: 
-    % Technology matrix A(n*n)
+% Specify the data used in the case study 
+    % Technology matrix A(p*n)
     % Intervention matrix B(m*n)
-    % Uncertain Technology matrix A_uncertainty(n*n)
-    % Uncertain Intervention matrix B_uncertainty(m*n)
-    % Constraint on H and d
+    % Uncertainty for A matrix: A_uncertainty(p*n)
+    % Uncertainty for B matrix: B_uncertainty(m*n)
+    % Final demand vector f
     
 A=[-2 100 0 0;10 0 10 0;0 0 -5 50];
 B=[10 5 12 1];
 
 [p,n]=size(A);
-[m,~]=size(B);
+[m,n]=size(B);
 
 A_uncertainty=zeros(p,n);
 B_uncertainty=zeros(m,n);

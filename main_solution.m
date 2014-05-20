@@ -10,10 +10,9 @@ CaseStudyData
 
 %specify the uncertainty budget
 gamma_i=[1 0 1 4]';
-%gamma_i=[0 0 0 4]';
 
-ObjFunVal=[];
-ObjFunVal2=[];
+ObjFunValR=[];
+ObjFunValD=[];
 Fuel=[];
 Coal=[];
 
@@ -24,16 +23,16 @@ gamma_i(4,1)=k;
 [matrixRobust, demandRobust] = BuildRobust(reformulatedMatrix, reformulatedDemand, reformulatedMatrixHat, gamma_i);
 
 %solve the robust optimization problem
-[x,fval] = SolveRobust(matrixRobust, demandRobust);
-[x2,fval2] = SolveRobust2(matrixRobust, demandRobust);
+[x,fvalR] = SolveRobust(matrixRobust, demandRobust);
+[x2,fvalD] = SolveDeterministic(matrixRobust, demandRobust);
 
 fuel=10*x(1);
 coal=10*x(3);
 Fuel=[Fuel fuel];
 Coal=[Coal coal];
 
-ObjFunVal=[ObjFunVal fval];
-ObjFunVal2=[ObjFunVal2 fval2];
+ObjFunValR=[ObjFunValR fvalR];
+ObjFunValD=[ObjFunValD fvalD];
 end
 
 
@@ -45,19 +44,17 @@ plot(temp4*100/4,Coal,'b--','LineWidth',2)
 hold off;
 xlabel('Budget of uncertainty (%)');
 ylabel('Electricity generated (kWh)');
-%grid on;
 legend('Electricity by oil','Electricity by coal');
 %title('Electricity generation strategy under uncertainty budget');
 
 figure
 temp4=0:0.01:k;
-plot(temp4*100/4,ObjFunVal,'r-','LineWidth',2)
+plot(temp4*100/4,ObjFunValR,'r-','LineWidth',2)
 hold on;
-plot(temp4*100/4,ObjFunVal2,'b--','LineWidth',2)
+plot(temp4*100/4,ObjFunValD,'b--','LineWidth',2)
 hold off;
 xlabel('Budget of uncertainty (%)');
 ylabel('Total CO2 Emissions (kg)');
-%grid on;
 legend('Robust approach','Deterministic approach');
 %title('Comparison between robust approach and deterministic approach');
 

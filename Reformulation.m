@@ -2,7 +2,7 @@ function [ reformulatedMatrix, reformulatedDemand, reformulatedMatrixHat ] = Ref
 %REFORMULATION This function reformulate the robust optimization problem
 %   Detailed explanation goes here
 [p,n]=size(A);
-[m,~]=size(B);
+[m,n]=size(B);
 
 zeros_11=zeros(p,n);
 zeros_12=zeros(p,m);
